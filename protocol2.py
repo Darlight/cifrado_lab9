@@ -25,5 +25,11 @@ p = 1
 derived_key_len = 32
 key = pyscrypt.hash(passwd, salt, N, r, p, derived_key_len)
 
-print("Derived key:", key.hex())
+print("Password: ", passwd)
+print("Salt: ", salt)
+print("\nIterations count: ", N)
+print("Block size: ", r)
+print("Threads running in parallel: ", p)
+print("Derived key length: ", derived_key_len)
+print("\nDerived key:", key.hex())
 
