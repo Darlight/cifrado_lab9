@@ -8,22 +8,29 @@ Augusto Alonso
 Andre Rodriguez
 Josue Sagastume 
 Christopher Barrios
-Jose Ovado
+Jose Ovando
 
 protocol.py
 Proposito: Programa que simula one-time password
 
+Codigo obtenido de: https://wizardforcel.gitbooks.io/practical-cryptography-for-developers-book/content/more-cryptographic-concepts/one-time-passwords-otp-example.html
 """
 import pyotp
 import time
-#pip install pyotp
 
-# link original: https://wizardforcel.gitbooks.io/practical-cryptography-for-developers-book/content/more-cryptographic-concepts/one-time-passwords-otp-example.html
-# OTP verificado por el secreto base 32
-base32secret = pyotp.random_base32()
-print('Secret:', base32secret)
-#el secreto se comparte entre el servidor de google y el cliente.
-totp_uri = pyotp.totp.TOTP(base32secret).provisioning_uri(
-    "andres.perdomo09@gmail.com",
-    issuer_name="Secure App")
-print(totp_uri)
+secret = pyotp.random_base32()
+print('Secret:', secret)
+totp = pyotp.TOTP(secret)
+
+token1 = totp.now()
+print("Token 1: ", token1)
+time.sleep(30)
+token2 = totp.now()
+print("Token 2: ", token2)
+
+status = totp.verify(token1)
+print("Token 1 validation: ", status)
+status = totp.verify(token2)
+print("Token 2 validation: ", status)
+
+
